@@ -3,16 +3,16 @@
 #include "lista/lista.h"
 
 int main(){
-    FILE *entrada = fopen("../data/entrada.txt", "r"); // Caminho relativo à pasta src
+    FILE *entrada = fopen("../data/entrada.txt", "r"); // Caminho relativo à pasta src a data
+    FILE *saida = fopen("../data/saida.txt", "w");     // Caminho relativo à pasta src a data
 
-    if (entrada == NULL) {
+    if (entrada == NULL || saida == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
     } else {
         printf("Sucesso ao abrir o arquivo!\n");
     }
 
-    // ... código para ler o arquivo ...
 
     fclose(entrada);
     return 0;
