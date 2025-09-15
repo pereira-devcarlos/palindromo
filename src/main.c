@@ -19,17 +19,15 @@ int main() {
 
     char linha[256];
     while (fgets(linha, sizeof(linha), entrada)) {
-        // Exibe a linha original
-        printf("\nLinha lida: %s", linha);
-
         // Normaliza
         normalizar(linha);
-
         // Exibe a linha normalizada
         printf("\nLinha apos normalizar: %s\n", linha);
 
+                
+
         // Escreve no arquivo de saída
-        fprintf(saida, "%s\n", linha);
+        //fprintf(saida, "%s\n", linha);
     }
 
     fclose(entrada);
