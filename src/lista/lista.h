@@ -9,9 +9,9 @@ typedef struct no {
 } No;
 
 struct fila* criar_fila();
-bool ehVazia(struct fila* fila);
-void push(struct fila* fila, int item);
-No* pop(struct fila* fila);
+bool filaEhVazia(struct fila* fila);
+void filaPush(struct fila* fila, int item);
+No* filaPop(struct fila* fila);
 No* obtem_elemento(struct fila* fila);
 char ehAcentuado(unsigned char c1, unsigned char c2);
 void normalizar(char *str);

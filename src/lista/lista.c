@@ -24,7 +24,7 @@ struct fila* criar_fila() {
 	return fila; 
 } 
 
-bool ehVazia(struct fila* fila) { 
+bool filaEhVazia(struct fila* fila) { 
 	// Se o início == NULL, então a fila é vazia
     if (fila->inicio == NULL) {
         return (true);
@@ -32,13 +32,13 @@ bool ehVazia(struct fila* fila) {
     return (false);
 } 
 
-void push(struct fila* fila, int item) { 
+void filaPush(struct fila* fila, int item) { 
     // Alocação do nó a ser inserido na fila
     No* insere = (No*) malloc(sizeof(No));
     insere->valor = item;
     insere->prox = NULL;
 
-    if (ehVazia(fila)) { 
+    if (filaEhVazia(fila)) { 
         fila->inicio = insere;
         fila->fim = insere;
     } else {
@@ -49,8 +49,8 @@ void push(struct fila* fila, int item) {
     fila->tamanhoAtul++;
 }
 
-No* pop(struct fila* fila) { 
-    if (ehVazia(fila)) {
+No* filaPop(struct fila* fila) { 
+    if (filaEhVazia(fila)) {
         return NULL; 
     } 
     else {
