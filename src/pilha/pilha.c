@@ -4,11 +4,6 @@
 #include <stdbool.h>
 #include "pilha.h"
 
-struct pilha { 
-	int topo; 
-	int tamanho; 
-	int* items; 
-}; 
 
 struct pilha* criar_pilha(int tamanho) { 
 	// Aloca a estrutura de dados pilha
@@ -44,7 +39,6 @@ void pilhaPush(struct pilha* pilha, int item) {
 	pilha->items[pilha->topo] = item; 
 } 
 
-
 int pilhaPop(struct pilha* pilha) { 
 	// Se a pilha estiver vazia, não tem como remover nenhum elemento
     if (pilhaEhVazia(pilha)) {
@@ -53,17 +47,6 @@ int pilhaPop(struct pilha* pilha) {
     }
     // Remove o elemento no topo da pilha e diminui o topo
 	return (pilha->items[pilha->topo--]); 
-} 
-
-int pilhaObtemElemento(struct pilha* pilha) { 
-	// Se a pilha estiver vazia, não tem como obter nenhum elemento
-    if (pilhaEhVazia(pilha)) {
-		printf("\nPilha  vazia. Impossível obter elementos");
-        return INT_MIN; 
-    }
-    // Retorna o elemento do topo da pilha
-	return pilha->items[pilha->topo]; 
 }
-
 
 
