@@ -5,65 +5,222 @@
 #include <string.h>
 #include "lista.h"
 
-// Estrutura da fila
-struct fila { 
-	No* inicio; 
-	No* fim; 
-	int tamanhoAtul; 
-	No* items; 
-};
-
-struct fila* criar_fila() { 
-	// Aloca a estrutura de dados fila
-    struct fila* fila = (struct fila*) malloc(sizeof(struct fila)); 
-    fila->inicio = NULL;
-    fila->fim = NULL;
-    fila->tamanhoAtul = 0; 
-    fila->items = NULL; 
-    // Retorna a fila
-	return fila; 
-} 
-
-bool filaEhVazia(struct fila* fila) { 
-	// Se o início == NULL, então a fila é vazia
-    if (fila->inicio == NULL) {
-        return (true);
-    } 
-    return (false);
-} 
-
-void filaPush(struct fila* fila, int item) { 
-    // Alocação do nó a ser inserido na fila
-    No* insere = (No*) malloc(sizeof(No));
-    insere->valor = item;
-    insere->prox = NULL;
-
-    if (filaEhVazia(fila)) { 
-        fila->inicio = insere;
-        fila->fim = insere;
+bool ehVazia(struct listaDupla *lista) {
+    if (lista->inicio == NULL) {
+        return (1);
     } else {
-        fila->fim->prox = insere;
-        fila->fim = insere;
+        return (0);
     }
-    fila->items = fila->inicio;
-    fila->tamanhoAtul++;
 }
 
-No* filaPop(struct fila* fila) { 
-    if (filaEhVazia(fila)) {
-        return NULL; 
-    } 
-    else {
-        No* rem = fila->inicio;
-        fila->inicio = fila->inicio->prox; 
-        fila->tamanhoAtul--;
+void inserir_inicio(struct listaDupla *lista, int elemento) {
+	tmp = (struct node*) malloc (sizeof(struct node));
+	tmp->data=elemento;
+	tmp->next = NULL;
+	tmp->prev = NULL;
+	if (ehVazia(lista)){
+		lista->inicio = tmp;
+		lista->fim = tmp;
+	} else {
+		tmp->next = lista->inicio;
+		lista->inicio->prev = tmp;
+		lista->inicio = tmp;
+	}
+}
 
-        if (fila->inicio == fila->fim) {
-            // Último elemento removido
-            fila->fim = NULL;
-        } 
-        return rem;
+void inserir_fim(struct listaDupla *lista, int elemento) {
+    tmp = (struct node*) malloc (sizeof(struct node));
+    tmp->data=elemento;
+    tmp->next=NULL;
+	tmp->prev = NULL;
+    if (ehVazia(lista)) {
+		lista->inicio = tmp;
+		lista->fim = tmp;
+    } else {
+        lista->fim->next = tmp;
+		tmp->prev = lista->fim;
+		lista->fim = tmp;
     }
+}
+
+// Função para inserir em uma determinada posição
+void inserir_posicao(struct listaDupla *lista, int elemento, int pos) {
+    // Caso for inserir na primeira posição
+    if (pos == 1){
+        inserir_inicio(lista, elemento);
+		return;
+    }
+
+    tmp = (struct node*) malloc (sizeof(struct node));
+    tmp->data=elemento;
+	tmp->next=NULL;
+	tmp->prev = NULL;
+
+	tmp1 = lista->inicio;
+    
+    for (int i = 1; i < pos && tmp1 != NULL; i++){
+        tmp1 = tmp1->next;
+    }
+    // Caso não tiver uma posição, liberar a memória
+    if (tmp1 == NULL){
+        printf("\nErro: posicao inexistente, no inserido no final da lista!");
+        inserir_fim(lista, elemento);
+		return;
+    }
+    // Inserir na lista duplamente encadeada
+	tmp->next = tmp1;
+	tmp->prev = tmp1->prev;
+	tmp1->prev->next = tmp;
+	tmp1->prev = tmp;
+}
+
+void apagar(struct listaDupla *lista, int ele) {
+	tmp = lista->inicio;
+	struct node *pre = tmp;
+	while (tmp != NULL) {
+		if (tmp->data==ele) {
+            if (tmp == lista->inicio) {
+                lista->inicio = lista->inicio->next;
+				if (lista->inicio != NULL){
+					lista->inicio->prev = NULL;
+				}
+				printf("\nElemento deletado - %d", tmp->data);			
+				free(tmp);
+				return;
+			} else if (tmp->next == NULL){
+				pre->next = NULL;
+				lista->fim = pre;
+				printf("\nElemento deletado - %d", tmp->data);			
+				free(tmp);
+				return;
+			} else {
+                pre->next=tmp->next;
+				tmp->next->prev = pre;
+				printf("\nElemento deletado - %d", tmp->data);			
+			    free(tmp);
+			    return;
+			}
+		} else {
+            pre = tmp;
+		    tmp = tmp->next;
+		}
+	}
+	printf("\n Valor não encontrado! ");
+ }
+ 
+void apagar_inicio(struct listaDupla *lista) {	
+	tmp = lista->inicio;
+	if (tmp == NULL) {
+		printf("\n Nenhum elemento deletado ");
+    } else {
+		printf("\nElemento deletado - %d", lista->inicio->data);
+		lista->inicio = lista->inicio->next;
+		if (lista->inicio != NULL){
+			lista->inicio->prev = NULL;
+		}
+		free(tmp);
+	}
+ }
+ 
+void apagar_fim(struct listaDupla *lista) {	
+	tmp= lista->fim;
+	struct node* pre;
+	if(lista->inicio == NULL) {
+		printf("\n Nenhum elemento deletado ");
+    } else {
+		if (lista->inicio->next == NULL){
+			lista->inicio = NULL;
+			lista->fim = NULL;
+			printf("\nElemento deletado - %d", tmp->data);
+			free(tmp);
+			return;
+		}
+		pre = lista->fim->prev;
+		pre->next= NULL;
+		lista->fim = pre;
+		
+		printf("\nElemento deletado - %d", tmp->data);
+		free(tmp);
+	}
+}
+
+// Função para apagar em uma determinada posição
+void apagar_posicao(struct listaDupla *lista,int pos) {
+	tmp = lista->inicio;
+	int i;
+
+	// Remover na primeira posição 
+	if (pos == 1){
+		if (lista->inicio == NULL) {
+			printf("\nErro: lista vazia!");
+			return;
+		}
+		apagar_inicio(lista);
+		return;
+	}
+
+	for (i = 1; i < pos - 1 && tmp != NULL; i++){
+		tmp = tmp->next;
+	}
+	tmp1 = tmp->next;
+	// Se tmp for NULL ou tmp->next for NULL, posição é inválida
+	if (tmp == NULL || tmp->next == NULL){
+		printf("\nErro: nao possui no nesta posicao!");
+		return;
+	} else if (tmp1->next == NULL){
+		apagar_fim(lista);
+		return;
+	} else {
+		tmp->next = tmp1->next;
+		tmp1->next->prev = tmp;
+		printf("\nElemento deletado - %d", tmp1->data);
+		free(tmp1);
+	}
+}	
+
+void imprimir(struct listaDupla *lista) {
+	tmp = lista->inicio;
+ 	while (tmp != NULL) {
+        printf("\n %d",tmp->data);
+	 	tmp = tmp->next;
+	}
+}
+
+int obter_primeiro(struct listaDupla *lista) {
+	if (lista->inicio == NULL) {
+		printf("\n Nenhum elemento encontrado ");
+        return (0);
+    } else {
+		return (lista->inicio->data);
+	}
+}
+
+int obter_ultimo(struct listaDupla *lista) {
+	if (lista->inicio == NULL) {
+		printf("\n Nenhum elemento encontrado ");
+        return (0);
+    } else {
+		return(lista->fim->data);
+	}
+}
+
+// Função para obter o valor em uma determinada posição
+int obter_posicao (struct listaDupla *lista, int pos) {
+	tmp = lista->inicio;
+
+	if (lista->inicio == NULL){
+		// Retornar 0 caso de lista vazia
+		return 0;
+	}
+
+	for (int i = 1; i < pos; i++){
+		tmp = tmp->next;
+	}
+	if (tmp == NULL || pos <= 0){
+		// Posição é inválida
+		return -1;
+	}
+	return tmp->data;
 }
 
 // Função para mapear caracteres UTF-8 acentuados para suas versões sem acento
