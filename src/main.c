@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 #include "lista.h"
-#include "pilha.h"
 
 
 int main() {
