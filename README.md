@@ -100,15 +100,6 @@ Além disso, o programa imprime o resultado no terminal.
 
 ---
 
-## 📑 Relatório
-O relatório deve conter:
-1. Introdução (definição e contexto do problema)
-2. Estrutura de dados utilizada
-3. Descrição e análise do algoritmo (incluindo complexidade)
-4. Explicação do Makefile e instruções de compilação
-
----
-
 ## 👨‍💻 Autores
 
 - Carlos Eduardo Pereira dos Santos
