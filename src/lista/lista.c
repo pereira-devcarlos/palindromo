@@ -156,3 +156,24 @@ void normalizar(char *str) {
     temp[j] = '\0';
     strcpy(str, temp);
 }
+
+// Função para verificar se uma lista é palíndromo
+bool eh_palindromo(struct listaDupla *lista) {
+    if (ehVazia(lista)) {
+        return true; // Lista vazia é considerada palíndromo
+    }
+    
+    struct node *inicio = lista->inicio;
+    struct node *fim = lista->fim;
+    
+    // Compara caracteres do início e fim, movendo-se em direção ao centro
+    while (inicio != fim && inicio->prev != fim) {
+        if (inicio->data != fim->data) {
+            return false;
+        }
+        inicio = inicio->next;
+        fim = fim->prev;
+    }
+    
+    return true;
+}

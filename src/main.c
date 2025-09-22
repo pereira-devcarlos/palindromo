@@ -22,6 +22,10 @@ int main() {
 
     char linha[256];
     while (fgets(linha, sizeof(linha), entrada)) {
+        // Salva a palavra original para exibir na saída
+        char palavra_original[256];
+        strcpy(palavra_original, linha);
+        
         // Normalizar a palavra ou frase
         normalizar(linha);
 
@@ -30,15 +34,18 @@ int main() {
         for (int i = 0; i < tamanho; i++){
             inserir_fim(lista, linha[i]);
         }
-        // Imprimir a lista
-        imprimir(lista);
-        printf("\n");
+        
+        // Verificar se é palíndromo
+        bool resultado = eh_palindromo(lista);
+        
+        // Escrever no arquivo de saída no formato: palavra,resultado
+        fprintf(saida, "%d\n", resultado ? 1 : 0);
+        
+        // Opcional: imprimir na tela também
+        printf("%d\n", resultado ? 1 : 0);
         
         // Apagar a lista para a próxima linha
         apagar_lista(lista);
-
-        // Escreve no arquivo de saída
-        //fprintf(saida, "%s\n", linha);
     }
 
     fclose(entrada);

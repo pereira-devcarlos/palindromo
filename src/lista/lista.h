@@ -23,5 +23,6 @@ int obter_ultimo(struct listaDupla *lista);
 int obter_posicao(struct listaDupla *lista, int pos);
 char ehAcentuado(unsigned char c1, unsigned char c2);
 void normalizar(char *str);
+bool eh_palindromo(struct listaDupla *lista);
 
 #endif // _H_LISTA
