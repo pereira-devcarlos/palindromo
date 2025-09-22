@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -O2
-SRC=main.c lista/lista.c pilha/pilha.c
-INC=-Ilista -Ipilha
+SRC=main.c lista/lista.c
+INC=-Ilista
 BUILD=build
 TARGET=$(BUILD)/palindromo
 

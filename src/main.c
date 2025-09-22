@@ -30,7 +30,12 @@ int main() {
         for (int i = 0; i < tamanho; i++){
             inserir_fim(lista, linha[i]);
         }
+        // Imprimir a lista
+        imprimir(lista);
+        printf("\n");
         
+        // Apagar a lista para a próxima linha
+        apagar_lista(lista);
 
         // Escreve no arquivo de saída
         //fprintf(saida, "%s\n", linha);
