@@ -15,21 +15,6 @@ bool ehVazia(struct listaDupla *lista) {
     }
 }
 
-void inserir_inicio(struct listaDupla *lista, int elemento) {
-	tmp = (struct node*) malloc (sizeof(struct node));
-	tmp->data=elemento;
-	tmp->next = NULL;
-	tmp->prev = NULL;
-	if (ehVazia(lista)){
-		lista->inicio = tmp;
-		lista->fim = tmp;
-	} else {
-		tmp->next = lista->inicio;
-		lista->inicio->prev = tmp;
-		lista->inicio = tmp;
-	}
-}
-
 void inserir_fim(struct listaDupla *lista, int elemento) {
     tmp = (struct node*) malloc (sizeof(struct node));
     tmp->data=elemento;
@@ -54,51 +39,6 @@ void apagar_lista(struct listaDupla *lista) {
 	}
 	lista->inicio = NULL;
 	lista->fim = NULL;
-}
-
-void imprimir(struct listaDupla *lista) {
-	tmp = lista->inicio;
- 	while (tmp != NULL) {
-        printf("%c",tmp->data);
-	 	tmp = tmp->next;
-	}
-}
-
-int obter_primeiro(struct listaDupla *lista) {
-	if (lista->inicio == NULL) {
-		printf("\n Nenhum elemento encontrado ");
-        return (0);
-    } else {
-		return (lista->inicio->data);
-	}
-}
-
-int obter_ultimo(struct listaDupla *lista) {
-	if (lista->inicio == NULL) {
-		printf("\n Nenhum elemento encontrado ");
-        return (0);
-    } else {
-		return(lista->fim->data);
-	}
-}
-
-// Função para obter o valor em uma determinada posição
-int obter_posicao (struct listaDupla *lista, int pos) {
-	tmp = lista->inicio;
-
-	if (lista->inicio == NULL){
-		// Retornar 0 caso de lista vazia
-		return 0;
-	}
-
-	for (int i = 1; i < pos; i++){
-		tmp = tmp->next;
-	}
-	if (tmp == NULL || pos <= 0){
-		// Posição é inválida
-		return -1;
-	}
-	return tmp->data;
 }
 
 // Função para mapear caracteres UTF-8 acentuados para suas versões sem acento
@@ -167,6 +107,7 @@ bool eh_palindromo(struct listaDupla *lista) {
     struct node *fim = lista->fim;
     
     // Compara caracteres do início e fim, movendo-se em direção ao centro
+	// Verifica se os ponteiros não se cruzaram ou se encontraram
     while (inicio != fim && inicio->prev != fim) {
         if (inicio->data != fim->data) {
             return false;

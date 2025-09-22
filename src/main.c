@@ -4,6 +4,8 @@
 #include <ctype.h>
 #include "lista.h"
 
+// O algoritmo é eficiente O(n/2) e aproveita a estrutura duplamente encadeada 
+// para navegar simultaneamente do início e do fim em direção ao centro.
 
 int main() {
     FILE *entrada = fopen("../data/entrada.txt", "r"); // Caminho relativo
@@ -16,8 +18,6 @@ int main() {
     if (entrada == NULL || saida == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
-    } else {
-        printf("Sucesso ao abrir o arquivo!\n");
     }
 
     char linha[256];
@@ -41,7 +41,7 @@ int main() {
         // Escrever no arquivo de saída no formato: palavra,resultado
         fprintf(saida, "%d\n", resultado ? 1 : 0);
         
-        // Opcional: imprimir na tela também
+        // Imprimir na tela também
         printf("%d\n", resultado ? 1 : 0);
         
         // Apagar a lista para a próxima linha
