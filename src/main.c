@@ -21,11 +21,7 @@ int main() {
     }
 
     char linha[256];
-    while (fgets(linha, sizeof(linha), entrada)) {
-        // Salva a palavra original para exibir na saída
-        char palavra_original[256];
-        strcpy(palavra_original, linha);
-        
+    while (fgets(linha, sizeof(linha), entrada)) {        
         // Normalizar a palavra ou frase
         normalizar(linha);
 

@@ -1,68 +1,64 @@
-# 🧩 Trabalho Prático 1 – Palíndromos  
+# 🧩 Trabalho Prático 1 – Palíndromos
 
-## 📌 Descrição  
-Este projeto foi desenvolvido como parte da disciplina **Algoritmos e Estruturas de Dados II (AEDS 2)** da **Universidade Federal de Alfenas (UNIFAL-MG)**.  
+## 📌 Descrição
+Este projeto foi desenvolvido para a disciplina **Algoritmos e Estruturas de Dados II (AEDS 2)** da **UNIFAL-MG**.
 
-O objetivo do trabalho é implementar um **algoritmo em C** capaz de verificar se uma palavra, frase ou número é um **palíndromo**.  
+O objetivo é implementar um **algoritmo em C** capaz de verificar se uma palavra, frase ou número é um **palíndromo**.
 
-Um **palíndromo** é uma sequência de caracteres que pode ser lida da esquerda para a direita ou da direita para a esquerda mantendo-se igual.  
-Exemplos:  
-- `Ana`  
-- `Otto`  
-- `01010`  
-- `Roma me tem amor`  
-- `12/3/21`  
+Um **palíndromo** é uma sequência de caracteres que pode ser lida da esquerda para a direita ou da direita para a esquerda mantendo-se igual.
 
-⚠️ Importante: No reconhecimento de palíndromos, **acentos, cedilha, espaços e sinais de pontuação não são considerados**.  
+**Exemplos:**
+- `Ana`
+- `Otto`
+- `01010`
+- `Roma me tem amor`
+- `12/3/21`
 
----
-
-## 🛠 Estruturas de Dados Utilizadas  
-O trabalho **não permite** o uso direto de funções de manipulação de strings para inverter ou percorrer a entrada.  
-Foram utilizadas apenas as estruturas de dados estudadas em sala:  
-
-- **Listas**  
-- **Filas**  
-- **Pilhas**  
-
-Essas estruturas permitem manipular os caracteres de forma organizada e verificar a simetria da sequência.  
+⚠️ **Importante:** No reconhecimento de palíndromos, **acentos, cedilha, espaços e sinais de pontuação não são considerados**. O algoritmo normaliza a entrada removendo esses caracteres e convertendo tudo para minúsculo.
 
 ---
 
-## 📂 Estrutura do Projeto  
+## 🛠 Estrutura de Dados Utilizada
+O trabalho utiliza **apenas lista duplamente encadeada** para manipular os caracteres, conforme implementado em `lista.c` e `lista.h`. Não são usadas pilhas ou filas na versão atual do código.
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```
-📦 trabalho-palindromos
-┣ 📜 main.c              # Código principal
-┣ 📜 lista.c / lista.h   # Implementação de listas
-┣ 📜 fila.c / fila.h     # Implementação de filas
-┣ 📜 pilha.c / pilha.h   # Implementação de pilhas
-┣ 📜 Makefile            # Automação da compilação
-┣ 📜 README.md           # Documentação do projeto
-┗ 📂 entradas
-┗ 📜 entrada.txt      # Arquivo de entrada com expressões
-
-````
+palindromo/
+├── LICENSE
+├── README.md
+├── data/
+│   ├── entrada.txt
+│   └── saida.txt
+├── src/
+│   ├── main.c
+│   ├── makefile
+│   └── build/
+│       └── palindromo
+│   └── lista/
+│       ├── lista.c
+│       └── lista.h
+```
 
 ---
 
-## ▶️ Execução do Programa  
+## ▶️ Execução do Programa
 
-### 🔧 Compilação  
-O projeto utiliza **Makefile** para facilitar a compilação.  
-No terminal, execute:  
+### 🔧 Compilação
+O projeto utiliza **Makefile** para facilitar a compilação. No terminal, execute:
 
 ```bash
 make
-````
+```
 
-Isso irá gerar o executável `palindromos`.
+Isso irá gerar o executável em `src/build/palindromo`.
 
 ### 📥 Entrada
+O programa lê o arquivo `data/entrada.txt`, onde cada linha contém uma expressão a ser verificada.
 
-O programa recebe um **arquivo de texto** (`entrada.txt`) contendo as expressões a serem verificadas, uma por linha.
-
-Exemplo de entrada (`entrada.txt`):
+Exemplo de entrada (`data/entrada.txt`):
 
 ```
 Ana
@@ -74,42 +70,40 @@ OtTo
 ```
 
 ### 📤 Saída
+O resultado é escrito em `data/saida.txt`, uma linha para cada expressão, indicando se é palíndromo (`1`) ou não (`0`).
 
-A saída é padronizada e mostra se a expressão é ou não um palíndromo.
-
-* `1` → é palíndromo
-* `0` → não é palíndromo
-
-Além disso, o programa deve mostrar o **passo a passo da verificação em duas colunas** (entrada → saída).
-
-Exemplo de saída:
+Exemplo de saída (`data/saida.txt`):
 
 ```
-Ana,1
-Maria,0
-12/3/21,1
-01010,1
-OtTo,1
-Ônibus,0
+1
+0
+1
+1
+1
+0
 ```
+
+Além disso, o programa imprime o resultado no terminal.
 
 ---
 
-## 📊 Complexidade
+## ⚙️ Funcionamento do Algoritmo
 
-A análise de complexidade deve ser descrita no relatório (`.pdf`) conforme solicitado no enunciado:
-
-* **Tempo:** Depende do tamanho da entrada `n`, sendo `O(n)` para verificar se a palavra é palíndromo.
-* **Espaço:** Estruturas auxiliares (pilhas e filas) também ocupam `O(n)`.
+1. **Normalização:**
+	- Remove acentos, cedilha, espaços e pontuação.
+	- Converte para minúsculo.
+2. **Construção da lista:**
+	- Cada caractere normalizado é inserido em uma lista duplamente encadeada.
+3. **Verificação de palíndromo:**
+	- O algoritmo compara os caracteres do início e do fim da lista, avançando para o centro.
+	- Complexidade: O(n/2) para cada expressão.
 
 ---
 
 ## 📑 Relatório
-
-Além do código, cada grupo deverá entregar um relatório em `.pdf` com as seções:
-
+O relatório deve conter:
 1. Introdução (definição e contexto do problema)
-2. Estruturas de dados utilizadas
+2. Estrutura de dados utilizada
 3. Descrição e análise do algoritmo (incluindo complexidade)
 4. Explicação do Makefile e instruções de compilação
 
@@ -117,7 +111,7 @@ Além do código, cada grupo deverá entregar um relatório em `.pdf` com as se�
 
 ## 👨‍💻 Autores
 
-* Carlos Eduardo Pereira dos Santos
-* Marcos Felipe dos Reis Bento
-* Guilherme Aredes
+- Carlos Eduardo Pereira dos Santos
+- Marcos Felipe dos Reis Bento
+- Guilherme de Oliveira Aredes
 
