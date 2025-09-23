@@ -2,13 +2,16 @@
 #include <stdbool.h>
 #define _H_LISTA
 
+// Definição da estrutura do nó da lista duplamente encadeada
 struct node {
     char data;
     struct node *next, *prev;
 };
 
-extern struct node *tmp, *tmp1;
+// Variável global para manipulação temporária de nós
+extern struct node *tmp;
 
+// Definição da estrutura da lista duplamente encadeada
 struct listaDupla {
 	struct node *inicio, *fim;
 };

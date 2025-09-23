@@ -4,22 +4,22 @@
 #include <ctype.h>
 #include "lista.h"
 
-// O algoritmo é eficiente O(n/2) e aproveita a estrutura duplamente encadeada 
-// para navegar simultaneamente do início e do fim em direção ao centro.
-
 int main() {
-    FILE *entrada = fopen("../data/entrada.txt", "r"); // Caminho relativo
-    FILE *saida = fopen("../data/saida.txt", "w");     // Caminho relativo
+    FILE *entrada = fopen("../data/entrada.txt", "r"); // Abrir arquivo de entrada
+    FILE *saida = fopen("../data/saida.txt", "w");     // Abrir arquivo de saída
 
+    // Inicializar a lista duplamente encadeada
     struct listaDupla *lista = malloc(sizeof(struct listaDupla));
     lista->inicio = NULL;
     lista->fim = NULL;
 
+    // Verificar se os arquivos foram abertos corretamente
     if (entrada == NULL || saida == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
     }
 
+    // Ler cada linha do arquivo de entrada
     char linha[256];
     while (fgets(linha, sizeof(linha), entrada)) {        
         // Normalizar a palavra ou frase
@@ -44,6 +44,7 @@ int main() {
         apagar_lista(lista);
     }
 
+    // Fechar os arquivos
     fclose(entrada);
     fclose(saida);
 

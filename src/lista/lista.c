@@ -5,8 +5,10 @@
 #include <string.h>
 #include "lista.h"
 
-struct node *tmp, *tmp1;
+// Variável global para manipulação temporária de nós
+struct node *tmp;
 
+// Função para verificar se a lista está vazia
 bool ehVazia(struct listaDupla *lista) {
     if (lista->inicio == NULL) {
         return (1);
@@ -15,6 +17,7 @@ bool ehVazia(struct listaDupla *lista) {
     }
 }
 
+// Função para inserir um elemento no final da lista
 void inserir_fim(struct listaDupla *lista, int elemento) {
     tmp = (struct node*) malloc (sizeof(struct node));
     tmp->data=elemento;
@@ -29,7 +32,8 @@ void inserir_fim(struct listaDupla *lista, int elemento) {
 		lista->fim = tmp;
     }
 }
- 
+
+// Função para apagar toda a lista e liberar memória
 void apagar_lista(struct listaDupla *lista) {	
 	tmp = lista->inicio;
 	while (tmp != NULL) {
@@ -103,6 +107,7 @@ bool eh_palindromo(struct listaDupla *lista) {
         return true; // Lista vazia é considerada palíndromo
     }
     
+    // Ponteiros para o início e o fim da lista
     struct node *inicio = lista->inicio;
     struct node *fim = lista->fim;
     
@@ -110,6 +115,7 @@ bool eh_palindromo(struct listaDupla *lista) {
 	// Verifica se os ponteiros não se cruzaram ou se encontraram
     while (inicio != fim && inicio->prev != fim) {
         if (inicio->data != fim->data) {
+            // Caracteres diferentes, não é palíndromo
             return false;
         }
         inicio = inicio->next;
