@@ -19,7 +19,7 @@ Um **palíndromo** é uma sequência de caracteres que pode ser lida da esquerda
 ---
 
 ## 🛠 Estrutura de Dados Utilizada
-O trabalho utiliza **apenas lista duplamente encadeada** para manipular os caracteres, conforme implementado em `lista.c` e `lista.h`. Não são usadas pilhas ou filas na versão atual do código.
+O trabalho utiliza **apenas lista duplamente encadeada** para manipular os caracteres, conforme implementado em `lista.c` e `lista.h`.
 
 ---
 
