@@ -18,7 +18,7 @@ bool ehVazia(struct listaDupla *lista) {
 }
 
 // Função para inserir um elemento no final da lista
-void inserir_fim(struct listaDupla *lista, int elemento) {
+void inserir_fim(struct listaDupla *lista, char elemento) {
     tmp = (struct node*) malloc (sizeof(struct node));
     tmp->data=elemento;
     tmp->next=NULL;

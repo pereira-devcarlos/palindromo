@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "lista.h"
+
+/** Trabalho Prático 1 – Palíndromos
+ *
+ * Este programa lê palavras ou frases de um arquivo de entrada,
+ * normaliza os caracteres (remove acentos, espaços e pontuação),
+ * insere os caracteres em uma lista duplamente encadeada e verifica
+ * se cada expressão é um palíndromo. O resultado é salvo em um arquivo
+ * de saída e exibido na tela.
+ */
 
 int main() {
     FILE *entrada = fopen("../data/entrada.txt", "r"); // Abrir arquivo de entrada
@@ -44,7 +52,8 @@ int main() {
         apagar_lista(lista);
     }
 
-    // Fechar os arquivos
+    // Fechar os arquivos e liberar memória
+    free(lista);
     fclose(entrada);
     fclose(saida);
 

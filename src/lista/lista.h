@@ -8,16 +8,13 @@ struct node {
     struct node *next, *prev;
 };
 
-// Variável global para manipulação temporária de nós
-extern struct node *tmp;
-
 // Definição da estrutura da lista duplamente encadeada
 struct listaDupla {
 	struct node *inicio, *fim;
 };
 
 bool ehVazia(struct listaDupla *lista);
-void inserir_fim(struct listaDupla *lista, int elemento);
+void inserir_fim(struct listaDupla *lista, char elemento);
 void apagar_lista(struct listaDupla *lista);
 char ehAcentuado(unsigned char c1, unsigned char c2);
 void normalizar(char *str);
