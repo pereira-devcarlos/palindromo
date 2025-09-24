@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lista.h"
+#include "lista/lista.h"
 
 /** Trabalho Prático 1 – Palíndromos
  *
@@ -42,10 +42,10 @@ int main() {
         // Verificar se é palíndromo
         bool resultado = eh_palindromo(lista);
         
-        // Escrever no arquivo de saída no formato: palavra,resultado
+        // Escrever o resultado no arquivo de saída
         fprintf(saida, "%d\n", resultado ? 1 : 0);
         
-        // Imprimir na tela também
+        // Imprimir o resultado na tela 
         printf("%d\n", resultado ? 1 : 0);
         
         // Apagar a lista para a próxima linha

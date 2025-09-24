@@ -76,16 +76,17 @@ void normalizar(char *str) {
     int i = 0, j = 0;
 
     while (str[i]) {
+        // Pega o caractere atual
         unsigned char c = str[i];
 
         if (c < 128) {
-            // ASCII normal
+            // Caractere ASCII sem acentuação
             if (isalnum(c)) {
                 temp[j++] = tolower(c);
             }
             i++;
         } else {
-            // Provavelmente início de um caractere UTF-8 multibyte
+            // Provavelmente início de um caractere UTF-8 multibyte (acentuado)
             unsigned char c1 = str[i];
             unsigned char c2 = str[i + 1];
 
@@ -97,16 +98,13 @@ void normalizar(char *str) {
         }
     }
 
+    // Finaliza a string normalizada 
     temp[j] = '\0';
     strcpy(str, temp);
 }
 
-// Função para verificar se uma lista é palíndromo
+// Função para verificar se a linha é palíndromo
 bool eh_palindromo(struct listaDupla *lista) {
-    if (ehVazia(lista)) {
-        return true; // Lista vazia é considerada palíndromo
-    }
-    
     // Ponteiros para o início e o fim da lista
     struct node *inicio = lista->inicio;
     struct node *fim = lista->fim;
