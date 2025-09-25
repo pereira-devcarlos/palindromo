@@ -102,7 +102,7 @@ Além disso, o programa imprime o resultado no terminal.
 
 ## 👨‍💻 Autores
 
-- Carlos Eduardo Pereira dos Santos
-- Marcos Felipe dos Reis Bento
-- Guilherme de Oliveira Aredes
+- [Carlos Eduardo Pereira dos Santos](https://github.com/pereira-devcarlos)
+- [Marcos Felipe dos Reis Bento](https://github.com/MarcosBento06)
+- [Guilherme de Oliveira Aredes](https://github.com/aredesog)
 
